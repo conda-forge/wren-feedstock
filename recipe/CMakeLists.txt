@@ -68,6 +68,21 @@ if (WREN_BUILD_STATIC)
                           OUTPUT_NAME "lib${OUTPUT_NAME}")
     list(APPEND WREN_TARGETS wren-static)
 
+    if (APPLE)
+        set_target_properties(wren-static PROPERTIES
+            MACOSX_RPATH ON
+        )
+    else ()
+        set_target_properties(wren-static PROPERTIES
+            BUILD_WITH_INSTALL_RPATH 1
+            SKIP_BUILD_RPATH FALSE
+        )
+    endif ()
+
+    set_target_properties(wren-static PROPERTIES
+        INSTALL_RPATH_USE_LINK_PATH TRUE
+    )
+
 endif()
 if (WREN_BUILD_SHARED)
     add_library(wren SHARED ${WREN_SRC_FILES})
@@ -80,6 +95,21 @@ if (WREN_BUILD_SHARED)
                           SOVERSION "0"
                           OUTPUT_NAME "libwren")
     list(APPEND WREN_TARGETS wren)
+
+    if (APPLE)
+        set_target_properties(wren PROPERTIES
+            MACOSX_RPATH ON
+        )
+    else ()
+        set_target_properties(wren PROPERTIES
+            BUILD_WITH_INSTALL_RPATH 1
+            SKIP_BUILD_RPATH FALSE
+        )
+    endif ()
+
+    set_target_properties(wren PROPERTIES
+        INSTALL_RPATH_USE_LINK_PATH TRUE
+    )
 endif()
 
 MESSAGE(STATUS "HEADERS " ${WREN_HEADERS})
