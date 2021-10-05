@@ -11,8 +11,8 @@ source:
 
 build:
   number: 3
-    run_exports:
-      - {{ pin_subpackage('wren') }}
+  run_exports:
+    - {{ pin_subpackage('wren') }}
 
 requirements:
   build:
