@@ -10,7 +10,9 @@ source:
   sha256: 23c0ddeb6c67a4ed9285bded49f7c91714922c2e7bb88f42428386bf1cf7b339
 
 build:
-  number: 2
+  number: 3
+    run_exports:
+    - {{ pin_subpackage('wren') }}
 
 requirements:
   build:
